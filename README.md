@@ -8,7 +8,10 @@
 # How to run Python scripts
 Make sure the virtual environment is activated ((.venv) shows in the terminal)
 
-## Conceptual Reflection
+## B.5 Conceptual Reflection
 1. The internal representation of Point changed from storing coordinates as separate .lon and .lat attributes to using a Shapely Point object stored in self.geometry.
 2. The external behavior of the class did not change: it still provides coordinate access, tuple conversion, and distance computation.
 3. All spatial computation now lives within the geometry object, allowing the Point class to delegate coordinate handling and distance calculations to Shapely.
+
+## C.3.Verify Shared Behavior
+3. The Point class does not define bbox() itself, but it inherits this method from SpatialObject. This allows a Point to call bbox(), and for a single point, the bounding box simply has the same min and max values.
