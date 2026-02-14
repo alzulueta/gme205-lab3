@@ -7,3 +7,8 @@
 5. Saved installed packages: pip freeze > requirements.txt
 # How to run Python scripts
 Make sure the virtual environment is activated ((.venv) shows in the terminal)
+
+## Conceptual Reflection
+1. The internal representation of Point changed from storing coordinates as separate .lon and .lat attributes to using a Shapely Point object stored in self.geometry.
+2. The external behavior of the class did not change: it still provides coordinate access, tuple conversion, and distance computation.
+3. All spatial computation now lives within the geometry object, allowing the Point class to delegate coordinate handling and distance calculations to Shapely.
