@@ -42,28 +42,3 @@ attrs = {
 parcel = Parcel(parcel_id=101, geometry=geom, attributes=attrs)
 print("Parcel BBox:", parcel.bbox())
 print("Parcel Zone:", parcel.attributes["zone"])
-
-# Challenge 1: Constructing from Dictionary: Point.from_dict(d)
-valid_row = {"id": "A", "lon": 121.0, "lat": 14.6, "name": "Gate", "tag": "POI"}
-invalid_row = {"id": "B", "lon": 999, "lat": 14.6, "name": "Invalid", "tag": "POI"}
-
-try:
-    p = Point.from_dict(valid_row)
-    print("Successfully created Point from dictionary:")
-    print("As dict:", {
-        "id": p.id,
-        "lon": p.geometry.x,
-        "lat": p.geometry.y,
-        "name": p.name,
-        "tag": p.tag
-    })
-except ValueError as e:
-    print("Failed to create Point:", e)
-
-try:
-    p_invalid = Point.from_dict(invalid_row)
-    print("Successfully created Point from invalid dictionary (should not happen):")
-    print(p_invalid.to_tuple())
-except ValueError as e:
-    print("Caught error for invalid dictionary:", e)
-

@@ -60,6 +60,15 @@ class Point(SpatialObject):
 			tag=d.get("tag")
 		)
 	
+	def as_dict(self):
+		return {
+            "id": self.id,
+            "name": self.name,
+            "tag": self.tag,
+            "geometry": (self.geometry.x, self.geometry.y),
+            "bbox": self.bbox()
+        }
+	
 class Parcel(SpatialObject):
     """
     Parcel = spatial object + structured attributes.
@@ -75,4 +84,12 @@ class Parcel(SpatialObject):
         super().__init__(geometry)  # Call SpatialObject constructor
         self.parcel_id = parcel_id
         self.attributes = attributes
+
+    def as_dict(self):
+        return {
+            "parcel_id": self.parcel_id,
+            "bbox": self.bbox(),
+            "attributes": self.attributes
+        }
+
 		
