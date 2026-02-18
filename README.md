@@ -22,3 +22,13 @@ Make sure the virtual environment is activated ((.venv) shows in the terminal)
 - Using a dictionary organizes semantic data in a flexible structure without defining how the object behaves.
 - All subclasses automatically gain the new method because they inherit the behavior of the base class.
 - It allows new spatial types to reuse existing structure and behavior, reducing duplication and making the system easier to extend.
+
+# Reflection: Challenge Exercises
+## Challenge 1 - from_dict() (Data -> Object Boundary)
+1. from_dict() should delegate validation to the constructor because constructor is the single source of truth for creating valid objects. This is to avoid duplicating validation logic and ensurs consistency and any changes to coordinate rules only need to be updated in one place. It also naturally raise errors for invalid dictionaries without extra code in from_dict().
+## Challenge 2 - as_dict() (Structured Output)
+2. as_dict() is implemented inside the object because the object “owns” its data and knows its structure. Placing it inside the class keeps responsibility with the object rather than scattering logic in scripts like run_lab3.py. This makes the system more maintainable and object-oriented.
+3. as_dict() must return only primitive data types (numbers, strings, booleans, tuples, dicts) because these types are JSON-serializable and can be easily exported or saved. Shapely geometry objects are complex and not directly serializable, so including them would break structured data output.
+## Challenge 3 - intersects() in SpatialObject (Inheritance)
+4. intersects() belongs in the base class because it is a spatial operation shared by all spatial objects. Defining it once in SpatialObject avoids duplication, simplifies maintenance, and ensures all subclasses automatically inherit it.
+5. If you add a new spatial subclass like Building, no changes are required to support intersects() because it inherits all methods from SpatialObject. As long as Building has a geometry attribute, it automatically gains the ability to intersect with other spatial objects.
