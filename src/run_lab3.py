@@ -1,6 +1,8 @@
 from shapely.geometry import Polygon
 from spatial import Parcel, Point
 
+# with AI support
+
 # Challenge 1: Point.from_dict()
 valid_row = {"id": "A", "lon": 121.0, "lat": 14.6, "name": "Gate", "tag": "POI"}
 invalid_row = {"id": "B", "lon": 999, "lat": 14.6, "name": "Invalid", "tag": "POI"}
@@ -47,3 +49,26 @@ parcel = Parcel(parcel_id=101, geometry=geom, attributes=attrs)
 
 print("\nParcel as dictionary:")
 print(parcel.as_dict())
+
+geom = Polygon([
+    (0, 0),
+    (10, 0),
+    (10, 5),
+    (0, 5)
+])
+
+attrs = {
+    "area": 50.0,
+    "zone": "Residential",
+    "is_active": True
+}
+
+parcel = Parcel(parcel_id=101, geometry=geom, attributes=attrs)
+
+inside = Point("P1", 5, 2)
+
+outside = Point("P2", 20, 20)
+
+print("\nIntersection Tests:")
+print("inside.intersects(parcel) →", inside.intersects(parcel))
+print("outside.intersects(parcel) →", outside.intersects(parcel))

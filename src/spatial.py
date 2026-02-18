@@ -1,18 +1,21 @@
 from shapely.geometry import Point as ShapelyPoint
 
 class SpatialObject:
-	"""
-	Base class for anything that exists in space.
-	Stores geometry and provides shared spatial behavior.
-	"""
-	def __init__(self, geometry):
-		self.geometry = geometry
+    """
+    Base class for anything that exists in space.
+    Stores geometry and provides shared spatial behavior.
+    """
+    def __init__(self, geometry):
+        self.geometry = geometry
 
-	def bbox(self):
-		"""
-		Return bounding box as (minx, miny, maxx, maxy).
-		"""
-		return self.geometry.bounds
+    def bbox(self):
+        """
+        Return bounding box as (minx, miny, maxx, maxy).
+        """
+        return self.geometry.bounds
+
+    def intersects(self, other) -> bool:
+        return self.geometry.intersects(other.geometry)
 	
 #class Point:
 #	def __init__(self, id, lon, lat, name=None, tag=None):
