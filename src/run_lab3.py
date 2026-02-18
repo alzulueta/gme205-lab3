@@ -50,6 +50,8 @@ parcel = Parcel(parcel_id=101, geometry=geom, attributes=attrs)
 print("\nParcel as dictionary:")
 print(parcel.as_dict())
 
+# Challenge 3: Inheritance Test: Add Shared Method to SpatialObject
+
 geom = Polygon([
     (0, 0),
     (10, 0),
