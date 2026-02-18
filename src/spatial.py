@@ -49,6 +49,17 @@ class Point(SpatialObject):
 	def distance_to(self, other):
 		return self.geometry.distance(other.geometry)
 	
+	@classmethod #with AI support
+	def from_dict(cls, d: dict):
+		"""Construct a Point from a dictionary."""
+		return cls(
+			id=d["id"],
+			lon=d["lon"],
+			lat=d["lat"],
+			name=d.get("name"),
+			tag=d.get("tag")
+		)
+	
 class Parcel(SpatialObject):
     """
     Parcel = spatial object + structured attributes.
@@ -59,7 +70,9 @@ class Parcel(SpatialObject):
             "is_active": True
         }
     """
+	
     def __init__(self, parcel_id, geometry, attributes: dict):
         super().__init__(geometry)  # Call SpatialObject constructor
         self.parcel_id = parcel_id
         self.attributes = attributes
+		
